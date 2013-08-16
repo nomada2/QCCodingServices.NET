@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CCCB747-6277-4D8E-9F1B-70D129BE7AA0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuantConnect.Server.Autocomplete.Worker</RootNamespace>
+    <AssemblyName>QuantConnect.Server.Autocomplete.Worker</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>QuantConnect.Server.Autocomplete.Worker.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\QuantConnect.Libraries\ICSharpCode.NRefactory\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp">
+      <HintPath>..\QuantConnect.Libraries\ICSharpCode.NRefactory\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\QuantConnect.Libraries\Mono.Cecil\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\QuantConnect.Libraries\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack">
+      <HintPath>..\QuantConnect.Libraries\ServiceStack\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\QuantConnect.Libraries\ServiceStack\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\QuantConnect.Libraries\ServiceStack\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.ServiceInterface">
+      <HintPath>..\QuantConnect.Libraries\ServiceStack\ServiceStack.ServiceInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\QuantConnect.Libraries\ServiceStack\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompletionDataFactory\CompletionData.cs" />
+    <Compile Include="CompletionDataFactory\DeclarationCategory.cs" />
+    <Compile Include="CompletionDataFactory\EntityCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\EventCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\ImportCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\LiteralCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\MemberCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\NamespaceCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\NewOverrideCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\NewPartialCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\TypeCompletionData.cs" />
+    <Compile Include="CompletionDataFactory\VariableCompletionData.cs" />
+    <Compile Include="MockWebServiceUtility.cs" />
+    <Compile Include="Models\CodeCompletionResult.cs" />
+    <Compile Include="Models\ProjectAnalysisModels.cs" />
+    <Compile Include="Models\ProjectItemBaseModels.cs" />
+    <Compile Include="Models\ProjectItemDtos.cs" />
+    <Compile Include="Models\ProjectItemModels.cs" />
+    <Compile Include="Models\ProjectModelConverters.cs" />
+    <Compile Include="Models\WebServiceModels.cs" />
+    <Compile Include="NRefactoryUtils.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CompletionDataFactory\CodeCompletionDataFactory.cs" />
+    <Compile Include="ServerProjectRepository.cs" />
+    <Compile Include="Services\ProjectModelRepository\InMemoryProjectModelRepo.cs" />
+    <Compile Include="Services\ProjectModelRepository\IProjectModelRepository.cs" />
+    <Compile Include="Services\ProjectModelRepository\PersistedProjectModelRepo.cs" />
+    <Compile Include="TestClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuantConnect.Algorithm.Interface\QuantConnect.Algorithm.Interface.csproj">
+      <Project>{338f614c-4cd7-418a-bd31-8c6a8690cfbf}</Project>
+      <Name>QuantConnect.Algorithm.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuantConnect.Common\QuantConnect.Common.csproj">
+      <Project>{2545c0b4-fabb-49c9-8dd1-9ad7ee23f86b}</Project>
+      <Name>QuantConnect.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
