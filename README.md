@@ -1,8 +1,8 @@
-# QCAutocomplete.NET
+# QCCodingServices.NET
 
 ## Introduction
 
-QCAutocomplete.NET is a web-service for generating suggestions to auto-complete C# code. It is provided in its raw and messy form. It will not build until tidied up to support a generic REST request. 
+QCCodingServices.NET is a web-service for generating suggestions to auto-complete C# code. It is provided in its raw and messy form. It will not build until tidied up to support a generic REST request. 
 
 ## How to Build
 
