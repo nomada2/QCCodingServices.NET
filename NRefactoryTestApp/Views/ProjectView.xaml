@@ -1,0 +1,77 @@
+<UserControl x:Class="NRefactoryTestApp.Views.ProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ViewModels="clr-namespace:NRefactoryTestApp.ViewModels"
+             xmlns:Views="clr-namespace:NRefactoryTestApp.Views" mc:Ignorable="d"
+             d:DesignHeight="293.552" d:DesignWidth="690.343">
+    
+    <UserControl.Resources>
+        <HierarchicalDataTemplate x:Key="ProjectDirectoryTemplate" ItemsSource="{Binding Path=Children}" DataType="ViewModels:ProjectDirectoryViewModel">
+            <!--<Button Command="{Binding Path=DataContext.SelectedPathFromTreeCommand, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}"
+                    CommandParameter="{Binding FullPathName}"-->
+            <Button Command="{Binding Path=DataContext.SelectedProjectItemFromTreeCommand, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}"
+                    CommandParameter="{Binding .}"
+                    Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Height="20"
+                    Focusable="False" ClickMode="Press">
+
+                <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Stretch" >
+                    <Image Source="../Images/folder.gif" Stretch="Fill" />
+                    <!--<Image Source="{Binding Path=MyIcon, Mode=OneTime}" Stretch="Fill" />-->
+                    <TextBlock Margin="5,0,0,0" Text="{Binding Name,Mode=OneTime}"/>
+                </StackPanel>
+            </Button>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate x:Key="ProjectFileTemplate" DataType="ViewModels:ProjectFileViewModel">
+            <!--<Button Command="{Binding Path=DataContext.SelectedPathFromTreeCommand, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}"
+                    CommandParameter="{Binding FullPathName}"-->
+            <Button Command="{Binding Path=DataContext.SelectedProjectItemFromTreeCommand, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}"
+                    CommandParameter="{Binding .}"
+                    Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Height="20"
+                    Focusable="False" ClickMode="Press">
+
+                <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Stretch" >
+                    <!--<Image Source="{Binding Path=MyIcon, Mode=OneTime}" Stretch="Fill" />-->
+                    <Image Source="../Images/leaf.gif" Stretch="Fill" />
+                    <TextBlock Margin="5,0,0,0" Text="{Binding Name,Mode=OneTime}"/>
+                </StackPanel>
+            </Button>
+        </HierarchicalDataTemplate>
+
+        <Views:ProjectDataTemplateSelector x:Key="ProjectDataTemplateSelector" FileDataTemplate="{StaticResource ResourceKey=ProjectFileTemplate}" DirectoryDataTemplate="{StaticResource ResourceKey=ProjectDirectoryTemplate}"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <!--<ContentControl>
+            <ContentControl.Content>
+                
+            </ContentControl.Content>
+        </ContentControl>-->
+        
+        <TreeView ItemsSource="{Binding Path=Children}"
+                  ItemTemplateSelector="{StaticResource ResourceKey=ProjectDataTemplateSelector}" Width="200" HorizontalAlignment="Left" Margin="0,26,0,0" >
+
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+
+        <TextBlock x:Name="FileName" HorizontalAlignment="Left" Margin="210,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" Height="21" FontSize="16"
+                   Text="{Binding Path=DataContext.SelectedProjectItem.Name, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}" />
+        <TextBlock x:Name="LineColumnTextBlock" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" FontSize="16"
+                   Text="{Binding Path=DataContext.SelectedProjectItem.CaretLocation, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}" HorizontalAlignment="Right" Width="145" TextAlignment="Right" />
+        <TextBox x:Name="SelectedFileContent"  Margin="210,26,0,0" TextWrapping="Wrap"
+                 Text="{Binding Path=DataContext.SelectedProjectItem.Content, Mode=TwoWay, RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}" AcceptsReturn="True" AcceptsTab="True" 
+                 KeyUp="SelectedFileContent_KeyUp" KeyDown="SelectedFileContent_KeyDown" 
+                 VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
+        <TextBlock x:Name="ProjectName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="21" FontSize="16"
+        	Text="{Binding DataContext.Name, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Views:ProjectView}}}" />
+        <!--<CheckBox x:Name="CtrlSpaceCheckBox" Content="CtrlSpace" Margin="0,5,8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="67"/>-->
+
+
+    </Grid>
+</UserControl>
