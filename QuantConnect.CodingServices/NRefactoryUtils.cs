@@ -317,11 +317,9 @@ namespace QuantConnect.CodingServices
 					        typeof(System.Linq.Enumerable).Assembly, // System.Core.dll
                             
                             // TODO: Eventually, we should consider loading these dynamically by assembly name
-                            Assembly.Load ("QuantConnect.Server.Algorithm.Interface"),  // Why not "QuantConnect.Algorithm.Interface"?
-                            Assembly.Load ("QuantConnect.Common"),
-                            Assembly.Load ("QuantConnect.Algorithm"),
-                            //typeof(QuantConnect.IAlgorithm).Assembly,  // QuantConnect.Algorithm.Interface.dll
-                            //typeof(QuantConnect.Models.Tick).Assembly,  // QuantConnect.Common.dll
+                            //Assembly.Load ("QuantConnect.Server.Algorithm.Interface"),  // Why not "QuantConnect.Algorithm.Interface"?
+                            //Assembly.Load ("QuantConnect.Common"),
+                            //Assembly.Load ("QuantConnect.Algorithm"),
 					        
                             //typeof(ICSharpCode.NRefactory.TypeSystem.IProjectContent).Assembly,
                             //typeof(System.Xml.XmlDocument).Assembly, // System.Xml.dll

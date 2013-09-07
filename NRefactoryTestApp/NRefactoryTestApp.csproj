@@ -170,8 +170,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(SolutionDir)..\NRefactory\ICSharpCode.NRefactory.Cecil\bin\$(ConfigurationName)\*Cecil*" "$(TargetDir)"
-copy "$(SolutionDir)..\NRefactory\ICSharpCode.NRefactory.IKVM\bin\$(ConfigurationName)\*IKVM*" "$(TargetDir)"
-copy "$(SolutionDir)..\QCAlgorithm\QuantConnect.Algorithm\bin\$(ConfigurationName)\*" "$(TargetDir)"</PostBuildEvent>
+copy "$(SolutionDir)..\NRefactory\ICSharpCode.NRefactory.IKVM\bin\$(ConfigurationName)\*IKVM*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
